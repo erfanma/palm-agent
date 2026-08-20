@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "palmistry-ai-agent-collection",
+		"name": "Palmistry AI Agent API",
+		"description": "Collection for testing the LangChain-powered Palmistry AI Agent REST API endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"health"
+					]
+				},
+				"description": "Checks server health and verifies active LLM provider configuration."
+			},
+			"response": []
+		},
+		{
+			"name": "2. Analyze Palm (File Upload)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"description": "Select a hand/palm photo (.jpg, .png, .webp)"
+						},
+						{
+							"key": "dominant_hand",
+							"value": "Right",
+							"type": "text",
+							"description": "Right or Left hand"
+						},
+						{
+							"key": "language",
+							"value": "Persian",
+							"type": "text",
+							"description": "Output language: 'Persian' or 'English'"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/analyze-palm/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"analyze-palm",
+						"upload"
+					]
+				},
+				"description": "Upload a hand image file directly for multi-modal palmistry analysis."
+			},
+			"response": []
+		},
+		{
+			"name": "3. Analyze Palm (Base64 JSON)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"image_base64\": \"data:image/jpeg;base64,/9j/4AAQSkZJRg...\",\n  \"dominant_hand\": \"Right\",\n  \"language\": \"Persian\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/analyze-palm/base64",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"analyze-palm",
+						"base64"
+					]
+				},
+				"description": "Send a Base64 data URI string or raw base64 string for analysis in Persian or English."
+			},
+			"response": []
+		}
+	]
+}
