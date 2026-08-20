@@ -39,3 +39,10 @@ desktop.ini
 *.log
 *.tmp
 logs/
+
+# SQLite Databases
+*.db
+*.sqlite
+*.sqlite3
+users.db
+app/db/users.db
